@@ -1,1 +1,7 @@
 /* Add your own styles */
+
+header h1{
+    text-align: center;
+    background-color: cadetblue;
+    padding: 5%;
+}
