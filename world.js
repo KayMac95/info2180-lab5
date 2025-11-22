@@ -15,9 +15,9 @@ $( document ).ready(function(){
         })
         .done(function(result){
             
-            //let result_div = $("#result");
-            //result_div.html(result);
-            console.log(result);
+            let result_div = $("#result");
+            result_div.html(result);
+            //console.log(result);
 
             
 

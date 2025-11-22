@@ -23,7 +23,30 @@ function country_lookup($country){
   return $countrylist;
 }
 
-echo json_encode(country_lookup($country));
+
+function build_Table($countries){
+  $tab = "<Table>";
+  $tr_strt = "<tr>";
+  $tr_end = "</tr>";
+  $th_strt = "<th>";
+  $th_end = "</th>";
+  $td_strt = "<td>";
+  $td_end = "</td>";
+
+  $tab .= $tr_strt . $th_strt . "Country Name" . $th_end . $th_strt . "Continent" . $th_end .
+  $th_strt . "Independence" . $th_end . $th_strt . "Head of State" . $th_end  . $tr_end; 
+
+  foreach ($countries as $country){
+    $tab .= $tr_strt . $td_strt . $country["name"] . $td_end . $td_strt . $country["continent"] . $td_end .
+    $td_strt . $country["independence_year"] . $td_end . $td_strt . $country["head_of_state"] . $td_end  . $tr_end;
+  }
+  $tab .= "</Table>";
+
+  return $tab;
+  
+}
+
+echo json_encode(build_Table(country_lookup($country)));
 ?>
 
 <?php
