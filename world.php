@@ -55,7 +55,7 @@ function city_lookup($country){
 
 
 function build_Table($countries){
-  $tab = "<Table class='res_table'>";
+  $tab = "<table class='res_table'>";
   $tr_strt = "<tr>";
   $tr_end = "</tr>";
   $th_strt = "<th>";
@@ -75,7 +75,7 @@ function build_Table($countries){
       $tab .= $tr_strt . $td_strt . htmlspecialchars($country["name"]) . $td_end . $td_strt . htmlspecialchars($country["continent"]) . $td_end .
       $td_strt . htmlspecialchars($country["independence_year"]) . $td_end . $td_strt . htmlspecialchars($country["head_of_state"]) . $td_end  . $tr_end;
     }
-    $tab .= "</Table>";
+    $tab .= "</table>";
     return $tab;
   }
 
@@ -88,7 +88,7 @@ function build_Table($countries){
     foreach ($countries as $country_city){
       $tab .= $tr_strt . $td_strt . htmlspecialchars($country_city["name"]) . $td_end . $td_strt . htmlspecialchars($country_city["district"]) . $td_end . $td_strt . htmlspecialchars($country_city["population"]) . $td_end . $tr_end;
     }
-    $tab .= "</Table>";
+    $tab .= "</table>";
     return $tab;
   }
   
