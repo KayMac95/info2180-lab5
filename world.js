@@ -50,6 +50,7 @@ $( document ).ready(function(){
 
         })
         .fail(function(result){
+            console.log(result);
             console.log("Something went wrong.");
         });
     });

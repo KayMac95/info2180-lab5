@@ -42,14 +42,13 @@ function city_lookup($country){
   $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
 
   $country = filter_input(INPUT_GET, 'country', FILTER_SANITIZE_STRING);
-  $stmt = $conn->prepare("SELECT countries.name AS country_name, cities.name AS city_name FROM countries JOIN cities ON countries.code = cities.country_code WHERE countries.name LIKE :country");
-  $like_country = "%{$country}%";
-  $stmt->bindParam(':country', $like_country, PDO::PARAM_STR);
+  $stmt = $conn->prepare("SELECT countries.name AS country, cities.name, cities.district, cities.population FROM cities JOIN countries ON countries.code = cities.country_code WHERE countries.name = :country");
+  $stmt->bindParam(':country', $country, PDO::PARAM_STR);
   $stmt->execute();
 
   $countrylist = [];
   while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-    $countrylist[$row['country_name']] = $row;
+    $countrylist[$row['country']] = $row;
   };
   return $countrylist;
 }
@@ -82,12 +81,12 @@ function build_Table($countries){
 
   else{
     // Set up the header row
-    $tab .= $tr_strt . $th_strt . "Country" . $th_end . $th_strt . "City" . $th_end . $tr_end;
+    $tab .= $tr_strt . $th_strt . "Name" . $th_end . $th_strt . "District" . $th_end . $th_strt . "Population" . $th_end .$tr_end;
 
 
     // Set up the rows for each country + city
-    foreach ($countries as $country){
-      $tab .= $tr_strt . $td_strt . htmlspecialchars($country["country_name"]) . $td_end . $td_strt . htmlspecialchars($country["city_name"]) . $td_end . $tr_end;
+    foreach ($countries as $country_city){
+      $tab .= $tr_strt . $td_strt . htmlspecialchars($country_city["name"]) . $td_end . $td_strt . htmlspecialchars($country_city["district"]) . $td_end . $td_strt . htmlspecialchars($country_city["population"]) . $td_end . $tr_end;
     }
     $tab .= "</Table>";
     return $tab;
